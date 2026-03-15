@@ -1,0 +1,21 @@
+[package]
+name = "fps_walkthrough"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# Path dependency on the local Bevy checkout.
+# `webgl2` is already included in Bevy's default feature set (via `default_platform`),
+# but we spell it out explicitly so it's obvious this build targets WebGL2 on WASM.
+bevy = { path = "../bevy", features = ["webgl2"] }
+
+# Release profile tuned for minimal WASM binary size.
+# `opt-level = "z"` prioritizes size over speed (use "s" for a mild speed/size tradeoff).
+# `lto = true`   enables link-time optimization across all crates — big size win.
+# `codegen-units = 1` lets LLVM do whole-program optimization.
+# `strip = true`  removes debug symbols from the final binary.
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
