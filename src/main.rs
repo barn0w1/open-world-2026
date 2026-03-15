@@ -6,6 +6,7 @@
 
 mod camera;
 mod player;
+mod terrain;
 mod world;
 
 use bevy::{
@@ -15,6 +16,7 @@ use bevy::{
 
 use camera::CameraPlugin;
 use player::PlayerPlugin;
+use terrain::chunk_manager::TerrainPlugin;
 use world::WorldPlugin;
 
 fn main() {
@@ -45,6 +47,6 @@ fn main() {
                 ..default()
             }),
         )
-        .add_plugins((PlayerPlugin, CameraPlugin, WorldPlugin))
+        .add_plugins((PlayerPlugin, CameraPlugin, WorldPlugin, TerrainPlugin))
         .run();
 }
