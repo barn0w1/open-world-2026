@@ -7,7 +7,8 @@ edition = "2024"
 # Path dependency on the local Bevy checkout.
 # `webgl2` is already included in Bevy's default feature set (via `default_platform`),
 # but we spell it out explicitly so it's obvious this build targets WebGL2 on WASM.
-bevy = {  version = "0.18.1", features = ["webgl2"] }
+bevy  = { version = "0.18.1", features = ["webgl2"] }
+noise = "0.9"
 
 # Release profile tuned for minimal WASM binary size.
 # `opt-level = "z"` prioritizes size over speed (use "s" for a mild speed/size tradeoff).
