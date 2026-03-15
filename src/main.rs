@@ -16,7 +16,7 @@ use bevy::{
 
 use camera::CameraPlugin;
 use player::PlayerPlugin;
-use terrain::chunk_manager::TerrainPlugin;
+use terrain::TerrainPlugin;
 use world::WorldPlugin;
 
 fn main() {
