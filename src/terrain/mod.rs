@@ -21,7 +21,7 @@ impl Plugin for TerrainPlugin {
         app
             .insert_resource(ChunkManager {
                 loaded:        HashMap::new(),
-                view_distance: 4,
+                view_distance: 1,
                 seed:          42,
             })
             .insert_resource(VoxelStore::default())
