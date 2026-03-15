@@ -6,9 +6,8 @@ pub mod r#gen;
 pub mod marching_cubes;
 pub mod mesh;
 
-pub use chunk_manager::{ChunkManager, TerrainChunk};
+pub use chunk_manager::ChunkManager;
 pub use deform::{DeformEvent, VoxelStore};
-pub use r#gen::{VoxelChunk, CHUNK_SIZE, VOXEL_SCALE};
 
 use bevy::prelude::*;
 use std::collections::HashMap;
