@@ -5,13 +5,13 @@ use bevy::{prelude::*, window::{CursorGrabMode, CursorOptions}};
 use crate::camera::FpsCamera;
 use crate::player::Player;
 use super::chunk_manager::{ChunkManager, TerrainChunk};
-use super::gen::{VoxelChunk, CHUNK_SIZE, VOXEL_SCALE};
+use super::r#gen::{VoxelChunk, CHUNK_SIZE, VOXEL_SCALE};
 use super::marching_cubes::extract;
 use super::mesh::build_mesh;
 
 // ── Event ─────────────────────────────────────────────────────────────────────
 
-#[derive(Event, Clone)]
+#[derive(Message, Clone)]
 pub struct DeformEvent {
     pub world_pos: Vec3,
     pub radius:    f32,
@@ -44,7 +44,7 @@ pub fn emit_deform_events(
     cursor_options: Single<&CursorOptions>,
     camera_gt:      Single<&GlobalTransform, With<FpsCamera>>,
     player:         Single<&Transform, With<Player>>,
-    mut events:     EventWriter<DeformEvent>,
+    mut events:     MessageWriter<DeformEvent>,
 ) {
     if cursor_options.grab_mode != CursorGrabMode::Locked {
         return;
@@ -66,7 +66,7 @@ pub fn emit_deform_events(
 /// Applies pending [`DeformEvent`]s to the voxel density field and rebuilds
 /// the affected chunk meshes.
 pub fn apply_deform(
-    mut events:  EventReader<DeformEvent>,
+    mut events:  MessageReader<DeformEvent>,
     mut store:   ResMut<VoxelStore>,
     manager:     Res<ChunkManager>,
     chunks_q:    Query<(Entity, &TerrainChunk, &Mesh3d)>,

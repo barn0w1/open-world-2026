@@ -4,7 +4,7 @@ use bevy::prelude::*;
 use std::collections::HashMap;
 
 use crate::player::Player;
-use super::gen::{VoxelChunk, CHUNK_SIZE, VOXEL_SCALE};
+use super::r#gen::{VoxelChunk, CHUNK_SIZE, VOXEL_SCALE};
 use super::marching_cubes::extract;
 use super::mesh::{build_mesh, terrain_material};
 
@@ -32,17 +32,6 @@ impl Default for ChunkManager {
 #[derive(Component)]
 pub struct TerrainChunk {
     pub chunk_pos: IVec3,
-}
-
-// ── Plugin ────────────────────────────────────────────────────────────────────
-
-pub struct TerrainPlugin;
-
-impl Plugin for TerrainPlugin {
-    fn build(&self, app: &mut App) {
-        app.init_resource::<ChunkManager>()
-            .add_systems(Update, update_loaded_chunks);
-    }
 }
 
 // ── System ────────────────────────────────────────────────────────────────────

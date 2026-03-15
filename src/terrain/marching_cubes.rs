@@ -1,7 +1,7 @@
 //! Marching Cubes iso-surface extraction (iso = 0.0, solid when density > 0).
 
-use super::gen::VoxelChunk;
-use super::gen::CHUNK_SIZE;
+use super::r#gen::VoxelChunk;
+use super::r#gen::CHUNK_SIZE;
 
 pub struct McOutput {
     pub positions: Vec<[f32; 3]>,

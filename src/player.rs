@@ -127,7 +127,7 @@ fn did_fixed_timestep_run(flag: Res<DidFixedTimestepRunThisFrame>) -> bool {
 // ── Systems ──────────────────────────────────────────────────────────────────
 
 fn spawn_player(mut commands: Commands) {
-    let start = Vec3::new(0.0, PLAYER_HALF_HEIGHT, 0.0);
+    let start = Vec3::new(0.0, 30.0, 0.0);
     commands.spawn((
         Name::new("Player"),
         Player,
@@ -137,7 +137,7 @@ fn spawn_player(mut commands: Commands) {
         PreviousPhysicalTranslation(start),
         Velocity::default(),
         AccumulatedInput::default(),
-        Grounded(true),
+        Grounded(false),
     ));
 }
 
@@ -242,13 +242,6 @@ fn advance_physics(
 
     // ── Integrate ────────────────────────────────────────────────────────────
     pos.0 += vel.0 * dt;
-
-    // ── Ground plane (y = 0) collision ───────────────────────────────────────
-    if pos.0.y <= PLAYER_HALF_HEIGHT {
-        pos.0.y = PLAYER_HALF_HEIGHT;
-        vel.0.y = 0.0;
-        grounded.0 = true;
-    }
 
     // ── Static obstacle AABB resolution ──────────────────────────────────────
     for (obs_tf, obs) in obstacles.iter() {

@@ -2,11 +2,8 @@
 
 use bevy::{
     prelude::*,
-    render::{
-        mesh::Indices,
-        render_asset::RenderAssetUsages,
-        render_resource::PrimitiveTopology,
-    },
+    asset::RenderAssetUsages,
+    mesh::{Indices, PrimitiveTopology},
 };
 
 use super::marching_cubes::McOutput;
