@@ -14,7 +14,7 @@
 //!   penetration depth.
 
 use bevy::{
-    ecs::schedule::{RunFixedMainLoopSystems, ScheduleLabel},
+    ecs::schedule::RunFixedMainLoopSystems,
     prelude::*,
 };
 

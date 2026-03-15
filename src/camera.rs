@@ -146,10 +146,12 @@ fn update_pointer_lock(
 fn update_mouse_look(
     motion: Res<AccumulatedMouseMotion>,
     cursor_options: Single<&CursorOptions>,
-    mut player: Single<&mut Transform, With<Player>>,
+    // `Without<FpsCamera>` makes this query disjoint from the camera query below
+    // so Bevy can verify at startup that both `&mut Transform` borrows are safe.
+    mut player: Single<&mut Transform, (With<Player>, Without<FpsCamera>)>,
     mut camera: Single<
         (&mut Transform, &mut CameraPitch, &CameraSensitivity),
-        With<FpsCamera>,
+        (With<FpsCamera>, Without<Player>),
     >,
 ) {
     // Guard: only rotate while pointer-locked.
