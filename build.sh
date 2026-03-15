@@ -3,16 +3,16 @@ rustup target add wasm32-unknown-unknown
 cargo install wasm-bindgen-cli --version 0.2.114   # exact version from bevy/Cargo.lock
 
 # Build
-cd /home/ubuntu/workspace/fps_walkthrough
+cd /home/ubuntu/workspace/open-world-2026
 cargo build --release --target wasm32-unknown-unknown
 
 # Generate JS bindings
 mkdir -p dist
 wasm-bindgen \
-  --out-name fps_walkthrough \
+  --out-name open-world-2026 \
   --out-dir dist \
   --target web \
-  target/wasm32-unknown-unknown/release/fps_walkthrough.wasm
+  target/wasm32-unknown-unknown/release/open-world-2026.wasm
 
 # Copy HTML and serve
 cp index.html dist/
