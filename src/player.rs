@@ -13,10 +13,7 @@
 //! - Static obstacles are AABB-resolved by pushing out on the axis of smallest
 //!   penetration depth.
 
-use bevy::{
-    ecs::schedule::RunFixedMainLoopSystems,
-    prelude::*,
-};
+use bevy::prelude::*;
 
 use crate::world::StaticObstacle;
 
@@ -160,7 +157,7 @@ fn set_fixed_timestep_flag(mut flag: ResMut<DidFixedTimestepRunThisFrame>) {
 /// is latched and only cleared by `advance_physics`.
 fn accumulate_player_input(
     keyboard: Res<ButtonInput<KeyCode>>,
-    mut player: Single<(&mut AccumulatedInput, &Grounded)>,
+    player: Single<(&mut AccumulatedInput, &Grounded)>,
 ) {
     let (mut input, grounded) = player.into_inner();
 
@@ -197,7 +194,7 @@ fn clear_accumulated_input(mut input: Single<&mut AccumulatedInput>) {
 /// this always has the frame's latest look direction.
 fn advance_physics(
     fixed_time: Res<Time<Fixed>>,
-    mut player: Single<
+    player: Single<
         (
             &Transform,   // used to read yaw for movement direction
             &mut PhysicalTranslation,
@@ -298,7 +295,7 @@ fn resolve_aabb(player_pos: &mut Vec3, player_vel: &mut Vec3, obs_center: Vec3, 
 /// separately by `update_mouse_look` in `camera.rs`.
 fn interpolate_player_visual(
     fixed_time: Res<Time<Fixed>>,
-    mut player: Single<
+    player: Single<
         (&mut Transform, &PhysicalTranslation, &PreviousPhysicalTranslation),
         With<Player>,
     >,

@@ -28,7 +28,6 @@
 use std::f32::consts::FRAC_PI_2;
 
 use bevy::{
-    ecs::schedule::RunFixedMainLoopSystems,
     input::mouse::AccumulatedMouseMotion,
     prelude::*,
     window::{CursorGrabMode, CursorOptions},
@@ -149,7 +148,7 @@ fn update_mouse_look(
     // `Without<FpsCamera>` makes this query disjoint from the camera query below
     // so Bevy can verify at startup that both `&mut Transform` borrows are safe.
     mut player: Single<&mut Transform, (With<Player>, Without<FpsCamera>)>,
-    mut camera: Single<
+    camera: Single<
         (&mut Transform, &mut CameraPitch, &CameraSensitivity),
         (With<FpsCamera>, Without<Player>),
     >,
